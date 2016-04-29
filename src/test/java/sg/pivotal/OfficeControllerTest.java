@@ -28,4 +28,12 @@ public class OfficeControllerTest {
                 .andExpect(jsonPath("$._embedded.offices[1].name", is("Boulder")))
                 .andExpect(jsonPath("$._links.self.href", is("http://localhost/offices")));
     }
+
+    @Test
+    public void getOffice() throws Exception {
+        mockMvc.perform(get("/offices/Singapore"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("Singapore")))
+                .andExpect(jsonPath("$._links.self.href", is("http://localhost/offices/Singapore")));
+    }
 }
