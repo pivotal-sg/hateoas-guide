@@ -1,6 +1,7 @@
 package sg.pivotal.web;
 
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.core.Relation;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import sg.pivotal.web.EmployeeAssembler.EmployeeResource;
 import sg.pivotal.domain.Employee;
@@ -20,6 +21,7 @@ public class EmployeeAssembler extends ResourceAssemblerSupport<Employee, Employ
         return new EmployeeResource(entity);
     }
 
+    @Relation(value = "employee", collectionRelation = "employees")
     static class EmployeeResource extends ResourceSupport {
         private String name;
         private String username;

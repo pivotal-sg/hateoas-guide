@@ -29,4 +29,14 @@ public class EmployeeIntegrationTest {
             .andExpect(jsonPath("$.salary").doesNotExist())
             .andExpect(jsonPath("$._links.self.href", is("http://localhost/employees/1")));
     }
+
+    @Test
+    public void getEmployees() throws Exception {
+        mockMvc.perform(get("/employees"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$._embedded.employees[0].name", is("Boaty McBoatface")))
+            .andExpect(jsonPath("$._embedded.employees[0]._links.self.href", is("http://localhost/employees/1")))
+            .andExpect(jsonPath("$._embedded.employees[1].name", is("Schoolie McSchoolface")))
+            .andExpect(jsonPath("$._links.self.href", is("http://localhost/employees")));
+    }
 }
